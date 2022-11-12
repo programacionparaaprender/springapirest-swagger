@@ -5,9 +5,15 @@
 --------------------------
 https://memorynotfound.com/spring-cloud-eureka-service-discovery-client-server-example/
 
+# curso
+https://www.udemy.com/course/curso-completo-junit-mockito-spring-boot-test/
+
+# youtube
+https://www.youtube.com/watch?v=j9k3epjUgr8
+
 # ejemplo de mockito
 https://www.geeksforgeeks.org/unit-testing-in-spring-boot-project-using-mockito-and-junit/
-
+https://www.geeksforgeeks.org/unit-testing-in-spring-boot-project-using-mockito-and-junit/
 ---------------------------------------
 # modificando el application.properties
 ---------------------------------------
