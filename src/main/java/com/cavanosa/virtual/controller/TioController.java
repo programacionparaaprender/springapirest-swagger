@@ -45,7 +45,7 @@ public class TioController {
     @GetMapping("/lista")
     public ResponseEntity<List<Tio>> lista(){
         List<Tio> list = tioService.findAll();
-        return new ResponseEntity(list, HttpStatus.OK);
+        return new ResponseEntity<List<Tio>>(list, HttpStatus.OK);
     }
 
     

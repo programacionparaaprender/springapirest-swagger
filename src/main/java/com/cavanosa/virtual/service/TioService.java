@@ -16,6 +16,11 @@ public class TioService {
     @Autowired
     TioRepository tioRepository;
 
+    
+    public TioService(TioRepository tioRepository) {
+        this.tioRepository = tioRepository;
+    }
+    
     @Transactional(readOnly = true)
     public List<Tio> findAll(){
         return tioRepository.findAll();
@@ -36,8 +41,12 @@ public class TioService {
         return tioRepository.findByEmail(email);
     }
 
-    public void save(Tio tio){
+    public boolean save(Tio tio){
+        if(tioRepository.existsByNombre(tio.getNombre()) || tioRepository.existsByEmail(tio.getEmail())) {
+            return false;
+        }
         tioRepository.save(tio);
+        return true;
     }
 
     public void delete(int id){

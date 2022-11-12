@@ -1,15 +1,17 @@
 
 
 --------------------------
-Ejemplo
+# Ejemplo
 --------------------------
 https://memorynotfound.com/spring-cloud-eureka-service-discovery-client-server-example/
 
 
+# ejemplo de mockito
+https://www.geeksforgeeks.org/unit-testing-in-spring-boot-project-using-mockito-and-junit/
 
 
 ---------------------------------------
-modificando el application.properties
+# modificando el application.properties
 ---------------------------------------
 https://www.youtube.com/watch?v=u-WkRMYhFb0
 Anterior de application.properties
