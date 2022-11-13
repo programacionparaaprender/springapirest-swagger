@@ -8,6 +8,9 @@ https://memorynotfound.com/spring-cloud-eureka-service-discovery-client-server-e
 # curso
 https://www.udemy.com/course/curso-completo-junit-mockito-spring-boot-test/
 
+# documentación
+https://www.geeksforgeeks.org/unit-testing-in-spring-boot-project-using-mockito-and-junit/
+
 # youtube
 https://www.youtube.com/watch?v=j9k3epjUgr8
 
