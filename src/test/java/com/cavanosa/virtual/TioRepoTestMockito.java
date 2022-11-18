@@ -7,13 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.isNotNull;
 import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.atMostOnce;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import com.cavanosa.virtual.entity.Tio;
@@ -103,6 +111,44 @@ public class TioRepoTestMockito {
         assertTrue(resultado.isPresent());
     }
     
+    @Test
+    void obtenerTioPorNombreVerify() {
+        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Optional<Tio> optTio = Optional.of(tio);
+        when(tioRepository.findByNombre("amiya")).thenReturn(optTio);
+        Optional<Tio> resultado = tioRepository.findByNombre("amiya");
+        assertTrue(resultado.isPresent());
+        //que se haya ejecutado una vez
+        verify(tioRepository, times(1)).findByNombre("amiya");
+        // que se haya ejecutado al menos una vez
+        verify(tioRepository, atLeast(1)).findByNombre("amiya");
+        // que se haya ejecutado al menos una vez
+        verify(tioRepository, atLeastOnce()).findByNombre("amiya");
+        // que se haya ejecutado a lo mucho una sola vez
+        verify(tioRepository, atMost(1)).findByNombre("amiya");
+        // que se haya ejecutado a lo mucho una sola vez
+        verify(tioRepository, atMostOnce()).findByNombre("amiya");
+    }
+
+    @Test
+    void obtenerTioPorNombreVerificarInteracciones() {
+        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Optional<Tio> optTio = Optional.of(tio);
+        when(tioRepository.findByNombre("amiya")).thenReturn(optTio);
+        Optional<Tio> resultado = tioRepository.findByNombre("amiya");
+        assertTrue(resultado.isPresent());
+        //que se haya ejecutado una vez
+        verify(tioRepository, times(1)).findByNombre("amiya");
+        //nunca se ejecuto
+        verify(tioRepository, never()).findByEmail("amiya@gmail.com");
+        verify(tioRepository, never()).findById(2);
+        
+        //da error por que si hay una interacción
+        //verifyNoInteractions(tioRepository);
+
+     
+    }
+
     @Test
     void obtenerLosTiosPorId(){
         Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
