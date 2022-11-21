@@ -15,8 +15,15 @@ https://www.geeksforgeeks.org/unit-testing-in-spring-boot-project-using-mockito-
 https://www.youtube.com/watch?v=j9k3epjUgr8
 
 # ejemplo de mockito
+´´´
 https://www.geeksforgeeks.org/unit-testing-in-spring-boot-project-using-mockito-and-junit/
 https://www.geeksforgeeks.org/unit-testing-in-spring-boot-project-using-mockito-and-junit/
+´´´
+# ejemplo de spring test
+´´´
+https://www.callicoder.com/spring-5-reactive-webclient-webtestclient-examples/
+´´´
+
 ---------------------------------------
 # modificando el application.properties
 ---------------------------------------

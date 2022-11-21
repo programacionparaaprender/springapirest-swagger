@@ -18,6 +18,8 @@ import static org.mockito.Mockito.when;
 import com.cavanosa.virtual.entity.Tio;
 import com.cavanosa.virtual.repository.TioRepository;
 import com.cavanosa.virtual.service.TioService;
+import com.cavanosa.virtual.service.impl.TioServiceImpl;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,7 +42,7 @@ public class TioTestSpy {
     private TioRepository tioRepository;
   
     @InjectMocks
-    private TioService tioService;
+    private TioServiceImpl tioService;
 
  
     @BeforeEach 

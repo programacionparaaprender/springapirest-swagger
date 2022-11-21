@@ -2,6 +2,7 @@ package com.cavanosa.virtual;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +28,8 @@ import static org.mockito.Mockito.when;
 import com.cavanosa.virtual.entity.Tio;
 import com.cavanosa.virtual.repository.TioRepository;
 import com.cavanosa.virtual.service.TioService;
+import com.cavanosa.virtual.service.impl.TioServiceImpl;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,6 +41,8 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import org.junit.jupiter.api.Order;
+
 
 import java.util.List;
 import java.util.LinkedList;
@@ -50,7 +55,7 @@ public class TioRepoTestMockito {
     private TioRepository tioRepository;
   
     @InjectMocks
-    private TioService tioService;
+    private TioServiceImpl tioService;
 
  
     @BeforeEach 
@@ -59,8 +64,22 @@ public class TioRepoTestMockito {
        
         
     }
- 
+
+
     @Test
+    @Order(4)
+    public void createTioTestSame()
+    {
+        Tio tio = new Tio(2,"amiya", "amiya@gmail.com", "123456");
+        Tio esperado = new Tio(2,"amiya", "amiya@gmail.com", "123456");
+        when(tioRepository.save(tio)).thenReturn(esperado);
+        Tio resultado = tioRepository.save(tio);
+        //comparando objetos
+        assertSame(esperado, resultado);
+    }
+
+    @Test
+    @Order(3)
     public void createTioTest()
     {
         Tio tio = new Tio("amiya", "amiya@gmail.com", "123456");
@@ -82,6 +101,7 @@ public class TioRepoTestMockito {
     }
 
     @Test
+    @Order(2)
     void testCrearNombreNullException() {
         
         when(tioRepository.findByNombre(isNull())).thenThrow(new IllegalArgumentException());
@@ -94,6 +114,7 @@ public class TioRepoTestMockito {
     }
 
     @Test
+    @Order(1)
     void obtenerUnTioPorId(){
         Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);

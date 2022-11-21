@@ -1,67 +1,19 @@
 package com.cavanosa.virtual.service;
 
 import com.cavanosa.virtual.entity.Tio;
-import com.cavanosa.virtual.repository.TioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@Transactional
-public class TioService {
 
-    @Autowired
-    TioRepository tioRepository;
+public interface TioService {
 
-    
-    public TioService(TioRepository tioRepository) {
-        this.tioRepository = tioRepository;
-    }
-    
-    @Transactional(readOnly = true)
-    public List<Tio> findAll(){
-        return tioRepository.findAll();
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Tio> getOneById(int id){
-        return tioRepository.findById(id);
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Tio> getOneByNombre(String nombre){
-        return tioRepository.findByNombre(nombre);
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Tio> getOneByEmail(String email){
-        return tioRepository.findByEmail(email);
-    }
-
-    public boolean save(Tio tio){
-        if(tioRepository.existsByNombre(tio.getNombre()) || tioRepository.existsByEmail(tio.getEmail())) {
-            return false;
-        }
-        tioRepository.save(tio);
-        return true;
-    }
-
-    public void delete(int id){
-        tioRepository.deleteById(id);
-    }
-
-    public boolean existsById(int id){
-        return tioRepository.existsById(id);
-    }
-
-    public boolean existsByNombre(String nombre){
-        return tioRepository.existsByNombre(nombre);
-    }
-
-    public boolean exixtsByEmail(String email){
-        return tioRepository.existsByEmail(email);
-    }
+    public List<Tio> findAll();
+    public Optional<Tio> getOneById(int id);
+    public Optional<Tio> getOneByNombre(String nombre);
+    public Optional<Tio> getOneByEmail(String email);
+    public boolean save(Tio tio);
+    public void delete(int id);
+    public boolean existsById(int id);
+    public boolean existsByNombre(String nombre);
+    public boolean exixtsByEmail(String email);
 }
