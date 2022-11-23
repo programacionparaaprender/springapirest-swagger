@@ -52,7 +52,7 @@ public class TioTestSpy {
         
     }
 
-    @Test
+    /* @Test
     void testSpyObtenerTios() {
         Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
@@ -66,5 +66,5 @@ public class TioTestSpy {
         assertEquals("amiya", resultado.getNombre());
         
         verify(tioRepository).findById(anyInt());
-    }
+    } */
 }

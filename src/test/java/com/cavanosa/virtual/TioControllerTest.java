@@ -29,7 +29,7 @@ public class TioControllerTest {
    
     }
 
-    @Test
+    /* @Test
     @Order(1)
     public void indexGetTest() {
         List<Tio> lista = new LinkedList<Tio>();
@@ -50,7 +50,7 @@ public class TioControllerTest {
                 Assertions.assertEquals(data, lista);
             });
 
-        /* this.webClient.get()
+        this.webClient.get()
             .uri("/dsfds/v1/fds")
             .accept(MediaType.APPLICATION_JSON)
             .header(HttpHeadersKey.dsfssfds,IDUU)
@@ -58,20 +58,20 @@ public class TioControllerTest {
             .exchange()
             .expectStatus().isOk()
             .expectBody(request.class)
-            .isEqualTo(response.get("get")); */
-    }
+        .isEqualTo(response.get("get")); 
+    } */
 
-    @Test
+    /* @Test
     @Order(2)
     public void indexPostTest() {
-        /* this.webClient.post()
-            .uri("/microexplicacionrecibos/v1/greeting")
+         this.webClient.post()
+            .uri("/ejemplos/v1/prueba")
             .accept(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(request.get(POST)))
             .exchange()
             .expectStatus().isEqualTo(HttpStatus.CREATED)
             .expectBody(response.class)
-            .isEqualTo(response.get(POST)); */
-    }
+            .isEqualTo(response.get(POST)); 
+    } */
 
 }

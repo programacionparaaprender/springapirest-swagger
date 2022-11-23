@@ -30,7 +30,7 @@ public class TioSpringMockBeanTest {
     }
 
 
-    @Test
+    /* @Test
     @Order(4)
     public void createTioTestSame()
     {
@@ -43,5 +43,5 @@ public class TioSpringMockBeanTest {
         //comparando objetos
         assertSame(esperado, resultado);
         assertTrue(resultado2);
-    }
+    } */
 }
