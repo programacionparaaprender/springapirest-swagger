@@ -76,16 +76,14 @@ public class IntegracionJpaTest {
 
     @Test
     void testDelete() {
-        Optional<Tio> tioOpt = tioRepository.findById(4);
-        Tio tioPepe = tioOpt.get();
-        assertEquals("Pepe123", tioPepe.getNombre());
-
-        tioRepository.delete(tioPepe);
-
-        //assertThrows(NoSuchElementException.class, () -> {
-//            cuentaRepository.findByPersona("John").orElseThrow();
-        //    tioRepository.findById(3).orElseThrow();
-        //});
         assertEquals(3, tioRepository.findAll().size());
+        Optional<Tio> tioOpt = tioRepository.findById(3);
+        if(tioOpt.isPresent()){
+            Tio tioPepe = tioOpt.get();
+            assertEquals("elias", tioPepe.getNombre());
+            tioRepository.delete(tioPepe);    
+        }
+
+        assertEquals(2, tioRepository.findAll().size());
     }
 }

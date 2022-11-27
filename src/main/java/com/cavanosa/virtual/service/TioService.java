@@ -9,6 +9,7 @@ public interface TioService {
 
     public List<Tio> findAll();
     public Optional<Tio> getOneById(int id);
+    public Tio getFindById(int id);
     public Optional<Tio> getOneByNombre(String nombre);
     public Optional<Tio> getOneByEmail(String email);
     public boolean save(Tio tio);

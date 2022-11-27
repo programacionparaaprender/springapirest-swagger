@@ -60,18 +60,30 @@ public class TioServiceImpl implements TioService{
         tioRepository.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public boolean existsById(int id){
         return tioRepository.existsById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public boolean existsByNombre(String nombre){
         return tioRepository.existsByNombre(nombre);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public boolean exixtsByEmail(String email){
         return tioRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Tio getFindById(int id) {
+        Optional<Tio> tioOpt = tioRepository.findById(id);
+        if(tioOpt.isPresent()){
+            return tioOpt.get();
+        }
+        return null;
     }
 }

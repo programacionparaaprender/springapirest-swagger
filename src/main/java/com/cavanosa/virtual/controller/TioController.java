@@ -4,29 +4,19 @@ import com.cavanosa.virtual.entity.Tio;
 import com.cavanosa.virtual.dto.Mensaje;
 import com.cavanosa.virtual.dto.TioDto;
 import com.cavanosa.virtual.service.TioService;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-
-import java.sql.DriverManager;
 import java.util.List;
-
-
-
-
-
 
 @Api(value = "TioController", description = "Api que gestiona los usuarios del sistema de prueba")
 @AllArgsConstructor
@@ -43,20 +33,20 @@ public class TioController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "lista") })
     @GetMapping("/lista")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Tio>> lista(){
         List<Tio> list = tioService.findAll();
         return new ResponseEntity<List<Tio>>(list, HttpStatus.OK);
     }
 
     
-    
     @ApiImplicitParams({
        @ApiImplicitParam(name = "getOne", required = true, value = "(Required) Title of the item.", dataType = "int")
     })
     @GetMapping("/detalle/{id}")
-    public ResponseEntity<Tio> getOne(@ApiParam @PathVariable("id") int id){
+    public ResponseEntity<?> getOne(@ApiParam @PathVariable("id") int id){
         if(!tioService.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return getMensaje("no existe", HttpStatus.NOT_FOUND);
         Tio tio = tioService.getOneById(id).get();
         return new ResponseEntity(tio, HttpStatus.OK);
     }
@@ -66,9 +56,16 @@ public class TioController {
     public ResponseEntity<?> login(@Valid @RequestBody TioDto tioDto, BindingResult bindingResult){
         //if(bindingResult.hasErrors())
         //    return new ResponseEntity(new Mensaje("campos mal puestos"), HttpStatus.BAD_REQUEST);
-        
         try{
-        	List<Tio> list2 = tioService.findAll();
+        	return logeo(tioDto);		
+        }catch(Exception e){
+        	return getMensaje("error en base de datos", HttpStatus.BAD_REQUEST);
+        }
+
+    }
+    
+    private ResponseEntity<?> logeo(TioDto tioDto){
+        List<Tio> list2 = tioService.findAll();
         	List<Tio> list = new java.util.LinkedList<Tio>();
         	for(Tio temp: list2) {
         		boolean uno = temp.getNombre().equalsIgnoreCase(tioDto.getNombre());
@@ -78,17 +75,19 @@ public class TioController {
         		}
         	}
             if(list.size() > 0) {
-            	//return new ResponseEntity(new Mensaje("usuario logeado"), HttpStatus.OK);
             	return new ResponseEntity<List<Tio>>(list, HttpStatus.OK);
             }else
-            	return new ResponseEntity(new Mensaje("usuario no existe"), HttpStatus.BAD_REQUEST);
-            		
-        }catch(Exception e){
-        	return new ResponseEntity(new Mensaje("error en base de datos"), HttpStatus.NO_CONTENT);
-        }
-
+            	return getMensaje("usuario no existe", HttpStatus.BAD_REQUEST);
     }
-    
+
+
+
+    private ResponseEntity<Mensaje> getMensaje(String mensaje, HttpStatus status){
+        Mensaje msj = new Mensaje(mensaje);
+        ResponseEntity<Mensaje> entity = new ResponseEntity<Mensaje>(msj, status);
+        return entity;
+    }
+
     @ApiOperation(value = "Crear nuevo Usuario", notes = "Crear nuevo Usuario del sistema")
     @RequestMapping(value = "/nuevo", method = RequestMethod.POST)
     public ResponseEntity<?> nuevo(@Valid @RequestBody TioDto tioDto, BindingResult bindingResult){
@@ -96,9 +95,9 @@ public class TioController {
         //return new ResponseEntity(new Mensaje("campos mal puestos"), HttpStatus.BAD_REQUEST);
     	try{
     	if(tioService.existsByNombre(tioDto.getNombre()))
-            return new ResponseEntity(new Mensaje("ya existe ese nombre"), HttpStatus.BAD_REQUEST);
+            return getMensaje("ya existe ese nombre", HttpStatus.BAD_REQUEST);
         if(tioService.exixtsByEmail(tioDto.getEmail()))
-            return new ResponseEntity(new Mensaje("ya existe ese email"), HttpStatus.BAD_REQUEST);
+            return getMensaje("ya existe ese email", HttpStatus.BAD_REQUEST);
         Tio tio = new Tio(tioDto.getNombre(), tioDto.getEmail(), tioDto.getPassword());
         tioService.save(tio);
         
@@ -107,13 +106,11 @@ public class TioController {
         list.add(tio);
         if(list.size() > 0) {
         	//return new ResponseEntity(new Mensaje("usuario logeado"), HttpStatus.OK);
-        	return new ResponseEntity<List<Tio>>(list, HttpStatus.OK);
+        	return new ResponseEntity<List<Tio>>(list, HttpStatus.CREATED);
         }else
-        	return new ResponseEntity(new Mensaje("usuario no existe"), HttpStatus.BAD_REQUEST);
-        
-        
+        	return getMensaje("usuario no existe", HttpStatus.BAD_REQUEST);
     	}catch(Exception e){
-        	return new ResponseEntity(new Mensaje("error en base de datos"), HttpStatus.NO_CONTENT);
+        	return getMensaje("error en base de datos", HttpStatus.BAD_REQUEST);
         }
     }
 

@@ -1,4 +1,6 @@
-
+# levantar proyecto
+mvn spring-boot:run
+mvn test
 
 --------------------------
 # Ejemplo
