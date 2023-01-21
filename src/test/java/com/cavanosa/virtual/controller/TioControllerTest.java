@@ -15,6 +15,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -48,18 +50,20 @@ class TioControllerTest {
     @Test
     void testDetalle() throws Exception {
         // Given
-        Tio tio = new Tio(1,"luis", "luis@ejemplo.com", "1234567890");
-        when(cuentaService.getFindById(1)).thenReturn(tio);
+        Tio tio1 = new Tio(1,"ejemplo13711","ejemplo13711@gmail.com","123456");
+        Optional<Tio> optTio = Optional.of(tio1);
+        when(cuentaService.getOneById(1)).thenReturn(optTio);
+        when(cuentaService.getFindById(1)).thenReturn(tio1);
+        mvc.perform( MockMvcRequestBuilders
+        .get("/tio/detalle/{id}", 1)
+        .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.nombre").value("ejemplo13711"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("ejemplo13711@ejemplo.com"));
 
-        // When
-        mvc.perform(get("/tio/detalle/1").contentType(MediaType.APPLICATION_JSON))
-        // Then
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.nombre").value("luis"))
-                .andExpect(jsonPath("$.email").value("luis@ejemplo.com"));
 
-        verify(cuentaService).getFindById(1);
+        verify(cuentaService).getOneById(1);
     }
 
     @Test
@@ -67,12 +71,14 @@ class TioControllerTest {
         // Given
        
         List<Tio> lista = new LinkedList<Tio>();
-        Tio tio1 = new Tio(1,"luis", "luis@ejemplo.com", "1234567890");
-        Tio tio2 = new Tio(2,"alberto", "alberto@ejemplo.com", "1234567890");
-        Tio tio3 = new Tio(3,"elias", "elias@ejemplo.com", "1234567890");
+        Tio tio1 = new Tio(1,"ejemplo13711","ejemplo13711@gmail.com","123456");
+        Tio tio2 = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio3 = new Tio(7, "ejemplo13712", "ejemplo13712@gmail.com", "123456");
+        Tio tio4 = new Tio(8, "ejemplo13713", "ejemplo13713@gmail.com", "123456");
         lista.add(tio1);
         lista.add(tio2);
         lista.add(tio3);
+        lista.add(tio4);
         when(cuentaService.findAll()).thenReturn(lista);
         // When
 
@@ -105,7 +111,7 @@ class TioControllerTest {
             }
         });
 
-
+        //new ResponseEntity<List<Tio>>(list, HttpStatus.CREATED)
         // when
         mvc.perform(post("/tio/nuevo").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(tio)))

@@ -49,7 +49,7 @@ import java.util.LinkedList;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class TioRepoTestMockito {
+class TioRepoTestMockito {
     
     @Mock 
     private TioRepository tioRepository;
@@ -68,7 +68,7 @@ public class TioRepoTestMockito {
 
     @Test
     @Order(4)
-    public void createTioTestSame()
+     void createTioTestSame()
     {
         Tio tio = new Tio(2,"amiya", "amiya@gmail.com", "123456");
         Tio esperado = new Tio(2,"amiya", "amiya@gmail.com", "123456");
@@ -80,7 +80,7 @@ public class TioRepoTestMockito {
 
     @Test
     @Order(3)
-    public void createTioTest()
+    void createTioTest()
     {
         Tio tio = new Tio("amiya", "amiya@gmail.com", "123456");
         Tio esperado = new Tio(2,"amiya", "amiya@gmail.com", "123456");
@@ -275,7 +275,7 @@ public class TioRepoTestMockito {
         Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
         TioRepository tioRepository = spy(TioRepository.class);
-        TioService tioService = new TioService(tioRepository);
+        TioService tioService = new TioServiceImpl(tioRepository);
         doReturn(optTio).when(tioRepository).findById(2);
         Optional<Tio> optTio2 = tioService.getOneById(2);
         assertTrue(optTio2.isPresent());

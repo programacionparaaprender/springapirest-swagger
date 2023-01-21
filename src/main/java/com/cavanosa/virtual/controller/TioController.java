@@ -64,6 +64,7 @@ public class TioController {
 
     }
     
+    @PostMapping("/logeo")
     private ResponseEntity<?> logeo(TioDto tioDto){
         List<Tio> list2 = tioService.findAll();
         	List<Tio> list = new java.util.LinkedList<Tio>();
@@ -82,7 +83,7 @@ public class TioController {
 
 
 
-    private ResponseEntity<Mensaje> getMensaje(String mensaje, HttpStatus status){
+    public ResponseEntity<Mensaje> getMensaje(String mensaje, HttpStatus status){
         Mensaje msj = new Mensaje(mensaje);
         ResponseEntity<Mensaje> entity = new ResponseEntity<Mensaje>(msj, status);
         return entity;
@@ -91,25 +92,19 @@ public class TioController {
     @ApiOperation(value = "Crear nuevo Usuario", notes = "Crear nuevo Usuario del sistema")
     @RequestMapping(value = "/nuevo", method = RequestMethod.POST)
     public ResponseEntity<?> nuevo(@Valid @RequestBody TioDto tioDto, BindingResult bindingResult){
-        //if(bindingResult.hasErrors())
-        //return new ResponseEntity(new Mensaje("campos mal puestos"), HttpStatus.BAD_REQUEST);
     	try{
-    	if(tioService.existsByNombre(tioDto.getNombre()))
-            return getMensaje("ya existe ese nombre", HttpStatus.BAD_REQUEST);
-        if(tioService.exixtsByEmail(tioDto.getEmail()))
-            return getMensaje("ya existe ese email", HttpStatus.BAD_REQUEST);
-        Tio tio = new Tio(tioDto.getNombre(), tioDto.getEmail(), tioDto.getPassword());
-        tioService.save(tio);
-        
-        //return new ResponseEntity(new Mensaje("tio guardado"), HttpStatus.CREATED);
-        List<Tio> list = new java.util.LinkedList<Tio>();
-        list.add(tio);
-        if(list.size() > 0) {
-        	//return new ResponseEntity(new Mensaje("usuario logeado"), HttpStatus.OK);
-        	return new ResponseEntity<List<Tio>>(list, HttpStatus.CREATED);
-        }else
-        	return getMensaje("usuario no existe", HttpStatus.BAD_REQUEST);
-    	}catch(Exception e){
+    	    if(tioService.existsByNombre(tioDto.getNombre()))
+                return getMensaje("ya existe ese nombre", HttpStatus.BAD_REQUEST);
+            if(tioService.exixtsByEmail(tioDto.getEmail()))
+                return getMensaje("ya existe ese email", HttpStatus.BAD_REQUEST);
+            Tio tio = new Tio(tioDto.getNombre(), tioDto.getEmail(), tioDto.getPassword());
+            tioService.save(tio);
+            if(tioService.save(tio) == true) {
+        	    return new ResponseEntity<Tio>(tio, HttpStatus.CREATED);
+            }else
+        	    return getMensaje("usuario no existe", HttpStatus.BAD_REQUEST);
+    	}
+        catch(Exception e){
         	return getMensaje("error en base de datos", HttpStatus.BAD_REQUEST);
         }
     }
