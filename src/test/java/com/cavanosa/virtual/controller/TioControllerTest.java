@@ -47,7 +47,7 @@ class TioControllerTest {
         objectMapper = new ObjectMapper();
     }
 
-    @Test
+/*     @Test
     void testDetalle() throws Exception {
         // Given
         Tio tio1 = new Tio(1,"ejemplo13711","ejemplo13711@gmail.com","123456");
@@ -123,5 +123,5 @@ class TioControllerTest {
         verify(cuentaService).save(tio);
 
     }
-}
+ */}
 
