@@ -1,4 +1,4 @@
-package com.cavanosa.virtual;
+package com.cavanosa.virtual.service;
 
 
 import static org.junit.jupiter.api.Assertions.assertSame;

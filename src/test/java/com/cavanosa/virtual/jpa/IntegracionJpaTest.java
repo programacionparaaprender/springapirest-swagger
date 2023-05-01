@@ -1,4 +1,4 @@
-package com.cavanosa.virtual;
+package com.cavanosa.virtual.jpa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

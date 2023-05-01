@@ -1,4 +1,4 @@
-package com.cavanosa.virtual;
+package com.cavanosa.virtual.repository;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

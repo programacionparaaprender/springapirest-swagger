@@ -90,5 +90,8 @@ spring.jpa.hibernate.ddl-auto = update
 # hibernate genera SQL optimizado
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
 
+### probar api desde bash
+curl -g http://localhost:8762/tio/detalle/1
+
 
 

@@ -9,20 +9,20 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
 @Api(value = "TioController", description = "Api que gestiona los usuarios del sistema de prueba")
-@AllArgsConstructor
 @RestController
 @RequestMapping("/tio") //localhost:8080/usuarios
 @CrossOrigin
+@Controller
 public class TioController {
 
     @Autowired
@@ -48,7 +48,8 @@ public class TioController {
         if(!tioService.existsById(id))
             return getMensaje("no existe", HttpStatus.NOT_FOUND);
         Tio tio = tioService.getOneById(id).get();
-        return new ResponseEntity(tio, HttpStatus.OK);
+        ResponseEntity<Tio> resultado = ResponseEntity.ok(tio);
+        return resultado;
     }
 
     

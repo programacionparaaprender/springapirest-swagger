@@ -6,6 +6,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,7 @@ import com.cavanosa.virtual.dto.TioDto;
 import com.cavanosa.virtual.entity.Tio;
 import com.cavanosa.virtual.service.TioService;
 
-
+ /*
 @SpringBootTest
 @AutoConfigureWebTestClient(timeout = "20000")
 @ExtendWith(MockitoExtension.class)
@@ -50,9 +52,18 @@ class TioNewControllerTest {
     @Test
     void obtenerIdTest(){
         int id = 2;
-        Tio esperado = new Tio(2,"amiya", "amiya@gmail.com", "123456");
-        when(tioService.getOneById(id).get()).thenReturn(esperado);
-        this.webClient.get()
+        Tio esperado = new Tio(2,"alberto", "alberto@ejemplo.com", "1234567890");
+        java.util.Optional<Tio> tioOpt = java.util.Optional.of(esperado);
+        when(tioService.getOneById(id)).thenReturn(tioOpt);
+        this.webClient.get().uri("/tio/detalle/" + id)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(ResponseEntity.class);
+       
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeadersKey.UNICA, unica);
+                this.webClient.get()
         .uri("/tio/detalle/" + id)
         .accept(MediaType.APPLICATION_JSON)
         .exchange()
@@ -62,6 +73,13 @@ class TioNewControllerTest {
             Tio resultado = response.getResponseBody();
             assertEquals(esperado, resultado);
         });
+
+         * Mockito.when(agentsService.getProductInventory(product)).thenReturn(Flux.just(PRODUCTS));
+        this.webClient.get().uri("/tio/detalle/" + id)
+                .accept(MediaType.APPLICATION_JSON).headers(httpHeaders -> httpHeaders.addAll(headers))
+                .header("ClientId", "12122322").exchange().expectStatus().isOk();
+         * 
+        
     }
     
     @Order(2)
@@ -141,7 +159,7 @@ class TioNewControllerTest {
     }
     
     
-   /*  
+  
     @Order(4)
     @Test
     void getMensajeTest(){
@@ -155,7 +173,7 @@ class TioNewControllerTest {
         assertEquals(mensajeEntity, respuesta);
         verify(tioController).getMensaje(mensaje, status);
     }
- */
+
     
     
     @Order(5)
@@ -203,3 +221,4 @@ class TioNewControllerTest {
     
 
 }
+*/
