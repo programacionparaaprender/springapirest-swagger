@@ -94,4 +94,25 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialec
 curl -g http://localhost:8762/tio/detalle/1
 
 
+### error Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+https://stackoverflow.com/questions/71282385/how-to-fix-dump-files-if-any-exist-date-dump-date-jvmrunn-dump-and-dat?answertab=active
+
+### error Caused by: org.apache.logging.log4j.LoggingException: log4j-slf4j-impl cannot be present with log4j-to-slf4j
+https://stackoverflow.com/questions/59629214/caused-by-org-apache-logging-log4j-loggingexception-log4j-slf4j-impl-cannot-be
+
+### error The Bean Validation API is on the classpath but no implementation could be found
+https://stackoverflow.com/questions/48483120/the-bean-validation-api-is-on-the-classpath-but-no-implementation-could-be-foun
+
+###
+http://localhost:8300/graphiql?query=%7B%0A%20%20hello%2C%0A%20%20soma(a%3A1%2C%20b%3A2)%0A%7D
+{
+  hello,
+  soma(a:1, b:2),
+  tios {
+    id,
+    nombre,
+    email
+  }
+}
+
 

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.isNotNull;
 import static org.mockito.ArgumentMatchers.isNull;
@@ -70,8 +71,8 @@ class TioRepoTestMockito {
     @Order(4)
      void createTioTestSame()
     {
-        Tio tio = new Tio(2,"amiya", "amiya@gmail.com", "123456");
-        Tio esperado = new Tio(2,"amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l,"amiya", "amiya@gmail.com", "123456");
+        Tio esperado = new Tio(2l,"amiya", "amiya@gmail.com", "123456");
         when(tioRepository.save(tio)).thenReturn(esperado);
         Tio resultado = tioRepository.save(tio);
         //comparando objetos
@@ -83,10 +84,10 @@ class TioRepoTestMockito {
     void createTioTest()
     {
         Tio tio = new Tio("amiya", "amiya@gmail.com", "123456");
-        Tio esperado = new Tio(2,"amiya", "amiya@gmail.com", "123456");
+        Tio esperado = new Tio(2l,"amiya", "amiya@gmail.com", "123456");
         //when(tioRepository.save(tio)).thenReturn(esperado);
         when(tioRepository.save(any(Tio.class))).then(new Answer<Tio>(){
-            int secuencia = 2;
+            Long secuencia = 2l;
             @Override
             public Tio answer(InvocationOnMock invocation) throws Throwable{
                 Tio tio = invocation.getArgument(0);
@@ -116,16 +117,16 @@ class TioRepoTestMockito {
     @Test
     @Order(1)
     void obtenerUnTioPorId(){
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
-        when(tioRepository.findById(2)).thenReturn(optTio);
-        Optional<Tio> resultado = tioRepository.findById(2);
+        when(tioRepository.findById(2l)).thenReturn(optTio);
+        Optional<Tio> resultado = tioRepository.findById(2l);
         assertTrue(resultado.isPresent());
     }
     
     @Test
     void obtenerTioPorNombre() {
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
         when(tioRepository.findByNombre("amiya")).thenReturn(optTio);
         Optional<Tio> resultado = tioRepository.findByNombre("amiya");
@@ -134,7 +135,7 @@ class TioRepoTestMockito {
     
     @Test
     void obtenerTioPorNombreVerify() {
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
         when(tioRepository.findByNombre("amiya")).thenReturn(optTio);
         Optional<Tio> resultado = tioRepository.findByNombre("amiya");
@@ -153,7 +154,7 @@ class TioRepoTestMockito {
 
     @Test
     void obtenerTioPorNombreVerificarInteracciones() {
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
         when(tioRepository.findByNombre("amiya")).thenReturn(optTio);
         Optional<Tio> resultado = tioRepository.findByNombre("amiya");
@@ -162,7 +163,7 @@ class TioRepoTestMockito {
         verify(tioRepository, times(1)).findByNombre("amiya");
         //nunca se ejecuto
         verify(tioRepository, never()).findByEmail("amiya@gmail.com");
-        verify(tioRepository, never()).findById(2);
+        verify(tioRepository, never()).findById(2l);
         
         //da error por que si hay una interacción
         //verifyNoInteractions(tioRepository);
@@ -172,23 +173,23 @@ class TioRepoTestMockito {
 
     @Test
     void obtenerLosTiosPorId(){
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
-        when(tioRepository.findById(2)).thenReturn(optTio);
-        Optional<Tio> resultado = tioRepository.findById(2);
+        when(tioRepository.findById(2l)).thenReturn(optTio);
+        Optional<Tio> resultado = tioRepository.findById(2l);
         assertTrue(resultado.isPresent());
         verify(tioRepository).findById(argThat(arg -> arg != null && arg > 0 && arg < 8));
     }
 
     @Test
     void obtenerLosTiosPorIdMatchers() {
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
-        when(tioRepository.findById(anyInt())).thenReturn(optTio);
-        Optional<Tio> resultado = tioRepository.findById(2);
+        when(tioRepository.findById(anyLong())).thenReturn(optTio);
+        Optional<Tio> resultado = tioRepository.findById(2l);
         assertTrue(resultado.isPresent());
         //no da error por que el valor buscado cumple con la norma
-        verify(tioRepository).findById(argThat(new MiArgsMatchers()));
+        verify(tioRepository).findById(anyLong());
 
     }
 
@@ -210,7 +211,7 @@ class TioRepoTestMockito {
 
     @Test
     void testDoThrowGuardarTio() {
-        Tio tio = new Tio(2,"amiya","amiya@gmail.com","123456");
+        Tio tio = new Tio(2l,"amiya","amiya@gmail.com","123456");
         doThrow(IllegalArgumentException.class).when(tioRepository).save(any());
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -220,17 +221,17 @@ class TioRepoTestMockito {
 
     @Test
     void testDoAnswerObtenerTio() {
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
-        when(tioRepository.findById(2)).thenReturn(optTio);
-        Optional<Tio> resultado = tioRepository.findById(2);
+        when(tioRepository.findById(2l)).thenReturn(optTio);
+        Optional<Tio> resultado = tioRepository.findById(2l);
         assertTrue(resultado.isPresent());
         
         doAnswer(invocation -> {
             int id = invocation.getArgument(0);
             return id == 2? optTio: Optional.empty();
-        }).when(tioRepository).findById(2);
-        Optional<Tio> resultado2 = tioService.getOneById(2);
+        }).when(tioRepository).findById(2l);
+        Optional<Tio> resultado2 = tioService.getOneById(2l);
         assertTrue(resultado2.isPresent());
         
     }
@@ -238,10 +239,10 @@ class TioRepoTestMockito {
     @Test
     void testDoAnswerGuardarTio() {
         Tio tio = new Tio("amiya", "amiya@gmail.com", "123456");
-        Tio esperado = new Tio(2,"amiya", "amiya@gmail.com", "123456");
+        Tio esperado = new Tio(2l,"amiya", "amiya@gmail.com", "123456");
         //when(tioRepository.save(tio)).thenReturn(esperado);
         doAnswer(new Answer<Tio>(){
-            int secuencia = 2;
+            Long secuencia = 2l;
             @Override
             public Tio answer(InvocationOnMock invocation) throws Throwable{
                 Tio tio = invocation.getArgument(0);
@@ -272,26 +273,26 @@ class TioRepoTestMockito {
 
     @Test
     void testSpyObtenerTios() {
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
         TioRepository tioRepository = spy(TioRepository.class);
         TioService tioService = new TioServiceImpl(tioRepository);
-        doReturn(optTio).when(tioRepository).findById(2);
-        Optional<Tio> optTio2 = tioService.getOneById(2);
+        doReturn(optTio).when(tioRepository).findById(2l);
+        Optional<Tio> optTio2 = tioService.getOneById(2l);
         assertTrue(optTio2.isPresent());
         Tio resultado = optTio2.get();
         assertEquals(2, resultado.getId());
         assertEquals("amiya", resultado.getNombre());
         
-        verify(tioRepository).findById(anyInt());
+        verify(tioRepository).findById(anyLong());
     }
 
     @Test
     void obtenerTodosLosTios(){
         List<Tio> lista = new LinkedList<Tio>();
-        Tio tio1 = new Tio(1,"ejemplo13711","ejemplo13711@gmail.com","123456");
-        Tio tio2 = new Tio(2,"amiya","amiya@gmail.com","123456");
-        Tio tio3 = new Tio(7,"ejemplo13712","ejemplo13712@gmail.com","123456");
+        Tio tio1 = new Tio(1l,"ejemplo13711","ejemplo13711@gmail.com","123456");
+        Tio tio2 = new Tio(2l,"amiya","amiya@gmail.com","123456");
+        Tio tio3 = new Tio(7l,"ejemplo13712","ejemplo13712@gmail.com","123456");
         lista.add(tio1);
         lista.add(tio2);
         lista.add(tio3);
@@ -304,20 +305,20 @@ class TioRepoTestMockito {
 
     @Test
     void testOrdenDeInvocaciones() {
-        Tio tio1 = new Tio(1,"ejemplo13711","ejemplo13711@gmail.com","123456");
+        Tio tio1 = new Tio(1l,"ejemplo13711","ejemplo13711@gmail.com","123456");
         Optional<Tio> optTio1 = Optional.of(tio1);
-        when(tioRepository.findById(1)).thenReturn(optTio1);
-        Optional<Tio> resultado1 = tioService.getOneById(1);
+        when(tioRepository.findById(1l)).thenReturn(optTio1);
+        Optional<Tio> resultado1 = tioService.getOneById(1l);
 
 
-        Tio tio = new Tio(2, "amiya", "amiya@gmail.com", "123456");
+        Tio tio = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
         Optional<Tio> optTio = Optional.of(tio);
-        when(tioRepository.findById(2)).thenReturn(optTio);
-        Optional<Tio> resultado2 = tioService.getOneById(2);
+        when(tioRepository.findById(2l)).thenReturn(optTio);
+        Optional<Tio> resultado2 = tioService.getOneById(2l);
         
         InOrder inOrder = Mockito.inOrder(tioRepository);
-        inOrder.verify(tioRepository).findById(1);
-        inOrder.verify(tioRepository).findById(2);
+        inOrder.verify(tioRepository).findById(1l);
+        inOrder.verify(tioRepository).findById(2l);
 
     }
     

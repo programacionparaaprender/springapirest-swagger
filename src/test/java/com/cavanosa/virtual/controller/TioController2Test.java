@@ -54,7 +54,7 @@ class TioController2Test {
         String url
           = "http://localhost:8762/tio/detalle/{id}";
         RestTemplate restTemplate = mock(RestTemplate.class);
-        Tio tio1 = new Tio(1,"ejemplo13711","ejemplo13711@gmail.com","123456");
+        Tio tio1 = new Tio(1l,"ejemplo13711","ejemplo13711@gmail.com","123456");
         ResponseEntity<Tio> entity = ResponseEntity.ok(tio1);
         when(restTemplate.getForEntity(url, Tio.class, 1)).thenReturn(entity);
         
@@ -67,10 +67,10 @@ class TioController2Test {
         String url = "http://localhost:8762/tio/lista";
         RestTemplate restTemplate = mock(RestTemplate.class);
         List<Tio> lista = new LinkedList<Tio>();
-        Tio tio1 = new Tio(1,"ejemplo13711","ejemplo13711@gmail.com","123456");
-        Tio tio2 = new Tio(2, "amiya", "amiya@gmail.com", "123456");
-        Tio tio3 = new Tio(7, "ejemplo13712", "ejemplo13712@gmail.com", "123456");
-        Tio tio4 = new Tio(8, "ejemplo13713", "ejemplo13713@gmail.com", "123456");
+        Tio tio1 = new Tio(1l,"ejemplo13711","ejemplo13711@gmail.com","123456");
+        Tio tio2 = new Tio(2l, "amiya", "amiya@gmail.com", "123456");
+        Tio tio3 = new Tio(7l, "ejemplo13712", "ejemplo13712@gmail.com", "123456");
+        Tio tio4 = new Tio(8l, "ejemplo13713", "ejemplo13713@gmail.com", "123456");
         lista.add(tio1);
         lista.add(tio2);
         lista.add(tio3);

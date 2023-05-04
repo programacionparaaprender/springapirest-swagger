@@ -11,7 +11,7 @@ import lombok.Data;
 public class Tio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @NotNull
     @Column(unique = true)
     private String nombre;
@@ -27,7 +27,7 @@ public class Tio {
     public Tio() {
     }
     
-    public Tio(int id, @NotNull String nombre, @NotNull String email, @NotNull String password) {
+    public Tio(Long id, @NotNull String nombre, @NotNull String email, @NotNull String password) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;

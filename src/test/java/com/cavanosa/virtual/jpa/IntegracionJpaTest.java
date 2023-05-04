@@ -17,7 +17,7 @@ public class IntegracionJpaTest {
 
     @Test
     void testFindById() {
-        Optional<Tio> tioOpt = tioRepository.findById(1);
+        Optional<Tio> tioOpt = tioRepository.findById(1l);
         assertTrue(tioOpt.isPresent());
         assertEquals("luis", tioOpt.orElseThrow().getNombre());
     }
@@ -77,7 +77,7 @@ public class IntegracionJpaTest {
     @Test
     void testDelete() {
         assertEquals(3, tioRepository.findAll().size());
-        Optional<Tio> tioOpt = tioRepository.findById(3);
+        Optional<Tio> tioOpt = tioRepository.findById(3l);
         if(tioOpt.isPresent()){
             Tio tioPepe = tioOpt.get();
             assertEquals("elias", tioPepe.getNombre());

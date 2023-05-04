@@ -30,7 +30,7 @@ public class TioServiceImpl implements TioService{
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Tio> getOneById(int id){
+    public Optional<Tio> getOneById(Long id){
         return tioRepository.findById(id);
     }
 
@@ -56,13 +56,13 @@ public class TioServiceImpl implements TioService{
     }
 
     @Override
-    public void delete(int id){
+    public void delete(Long id){
         tioRepository.deleteById(id);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public boolean existsById(int id){
+    public boolean existsById(Long id){
         return tioRepository.existsById(id);
     }
 
@@ -79,7 +79,7 @@ public class TioServiceImpl implements TioService{
     }
 
     @Override
-    public Tio getFindById(int id) {
+    public Tio getFindById(Long id) {
         Optional<Tio> tioOpt = tioRepository.findById(id);
         if(tioOpt.isPresent()){
             return tioOpt.get();

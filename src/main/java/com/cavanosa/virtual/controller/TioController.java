@@ -44,7 +44,7 @@ public class TioController {
        @ApiImplicitParam(name = "getOne", required = true, value = "(Required) Title of the item.", dataType = "int")
     })
     @GetMapping("/detalle/{id}")
-    public ResponseEntity<?> getOne(@ApiParam @PathVariable("id") int id){
+    public ResponseEntity<?> getOne(@ApiParam @PathVariable("id") Long id){
         if(!tioService.existsById(id))
             return getMensaje("no existe", HttpStatus.NOT_FOUND);
         Tio tio = tioService.getOneById(id).get();
@@ -112,7 +112,7 @@ public class TioController {
 
     @ApiOperation(value = "Actualizar Usuarios", notes = "Enviar Usuarios a Actualizar", response = ResponseEntity.class)
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<?> actualizar(@Valid @RequestBody TioDto tioDto, BindingResult bindingResult, @PathVariable("id") int id){
+    public ResponseEntity<?> actualizar(@Valid @RequestBody TioDto tioDto, BindingResult bindingResult, @PathVariable("id") Long id){
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("campos mal puestos"), HttpStatus.BAD_REQUEST);
         if(!tioService.existsById(id))
@@ -131,7 +131,7 @@ public class TioController {
 
     @ApiOperation(value = "Eliminar Usuarios", notes = "Enviar Usuarios a Eliminar", response = ResponseEntity.class)
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable("id") int id){
+    public ResponseEntity<?> borrar(@PathVariable("id") Long id){
         if(!tioService.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         tioService.delete(id);

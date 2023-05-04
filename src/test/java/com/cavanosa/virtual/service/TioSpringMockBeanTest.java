@@ -1,18 +1,10 @@
 package com.cavanosa.virtual.service;
 
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
-
-import com.cavanosa.virtual.entity.Tio;
 import com.cavanosa.virtual.repository.TioRepository;
-import com.cavanosa.virtual.service.TioService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.junit.jupiter.api.Order;
 
 public class TioSpringMockBeanTest {
     @MockBean 
