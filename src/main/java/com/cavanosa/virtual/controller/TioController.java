@@ -92,7 +92,7 @@ public class TioController {
 
     @ApiOperation(value = "Crear nuevo Usuario", notes = "Crear nuevo Usuario del sistema")
     @RequestMapping(value = "/nuevo", method = RequestMethod.POST)
-    public ResponseEntity<?> nuevo(@Valid @RequestBody TioDto tioDto, BindingResult bindingResult){
+    public ResponseEntity<?> saveTio(@Valid @RequestBody TioDto tioDto, BindingResult bindingResult){
     	try{
     	    if(tioService.existsByNombre(tioDto.getNombre()))
                 return getMensaje("ya existe ese nombre", HttpStatus.BAD_REQUEST);
@@ -131,7 +131,7 @@ public class TioController {
 
     @ApiOperation(value = "Eliminar Usuarios", notes = "Enviar Usuarios a Eliminar", response = ResponseEntity.class)
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<?> borrar(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteTio(@PathVariable("id") Long id){
         if(!tioService.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         tioService.delete(id);

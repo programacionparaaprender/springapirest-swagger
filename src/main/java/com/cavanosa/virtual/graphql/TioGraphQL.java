@@ -7,7 +7,7 @@ import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
+import org.modelmapper.ModelMapper;
 import java.util.List;
 
 @Component
@@ -32,10 +32,12 @@ public class TioGraphQL implements GraphQLQueryResolver, GraphQLMutationResolver
         return list;
     }
 
-    public Tio saveTio(Tio input) {
+    public Tio saveTio(TioInput input) {
         Tio tio = new Tio();
-        if(tioService.save(input))
-            return input;
+        ModelMapper m = new ModelMapper();
+        tio = m.map(input,Tio.class);
+        if(tioService.save(tio))
+            return tio;
         return tio;
     }
 

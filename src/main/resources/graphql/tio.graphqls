@@ -5,13 +5,20 @@ type Tio {
     password: String!
 }
 
+input TioInput {
+    id:ID,
+    nombre: String!,
+    email: String!,
+    password: String!
+}
+
 extend type Query {
     tio(id:ID!):Tio
     tios:[Tio]!
 }
 
 extend type Mutation {
-    saveTio(tio:Tio!):Tio!
+    saveTio(tio:TioInput!):Tio!
 
     deleteTio(id:ID!):Boolean!
 }
