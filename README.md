@@ -106,26 +106,35 @@ https://stackoverflow.com/questions/48483120/the-bean-validation-api-is-on-the-c
 ###
 http://localhost:8300/graphiql?query=%7B%0A%20%20hello%2C%0A%20%20soma(a%3A1%2C%20b%3A2)%0A%7D
 # solo query o mutation
-query {
+query GetCliente($id:ID!){
   hello,
   soma(a:1, b:2),
+  t1: tio(id: $id) {
+    id, nombre, email, password
+  },
+  t2: tio(id: 2) {
+    ...fragTio
+  },
   tios {
-    id,
-    nombre,
-   email
+    id, nombre, password
   }
 }
+
+fragment fragTio on Tio {
+  id, nombre, email, password
+}
+
 # solo se puede ejecutar uno a la vez
-#mutation{
-#  saveTio(tio:{
-#    nombre:"nuevo",
-#    email:"nuevo@ejemplo.com",
-#    password:"12345678"
-#  }) {
-#    id, nombre
-#  },
-#  deleteTio(id: 4)
-# }
+mutation{
+ saveTio(tio:{
+    nombre:"nuevo",
+    email:"nuevo@ejemplo.com",
+    password:"12345678"
+  }) {
+    id, nombre
+  },
+  deleteTio(id: 4)
+}
 
 
 #### ver esquema
