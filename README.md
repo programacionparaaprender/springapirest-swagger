@@ -2,6 +2,9 @@
 mvn spring-boot:run
 mvn test
 
+### proyecto del curso
+https://github.com/rlechetaudemy/springboot_graphql
+
 --------------------------
 # Ejemplo
 --------------------------

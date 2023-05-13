@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="tio")
+@Cacheable
 public class Tio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
