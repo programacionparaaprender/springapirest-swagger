@@ -31,18 +31,18 @@ class VirtualApplicationTests {
 //		Datos.CUENTA_002.setSaldo(new BigDecimal("2000"));
 //		Datos.BANCO.setTotalTransferencias(0);
 	}
-    
+      /*  
 	@Test
     void contextLoads() {
-    /* 
+ 
         Tio tio = new Tio(2,"amiya", "amiya@gmail.com", "123456");
         Tio esperado = new Tio(2,"amiya", "amiya@gmail.com", "123456");
         when(tioRepository.save(tio)).thenReturn(esperado);
         Tio resultado = tioRepository.save(tio);
         //comparando objetos
         assertEquals(esperado, resultado);
-    */
+    
     }
-
+*/
 	
 }

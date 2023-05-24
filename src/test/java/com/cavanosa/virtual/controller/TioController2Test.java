@@ -28,7 +28,6 @@ import com.cavanosa.virtual.dto.TioDto;
 
 //@WebMvcTest(controllers = TioController.class)
 //@RunWith(SpringRunner.class)
-@SpringBootTest
 @AutoConfigureWebTestClient(timeout = "20000")
 @ExtendWith(MockitoExtension.class)
 class TioController2Test {

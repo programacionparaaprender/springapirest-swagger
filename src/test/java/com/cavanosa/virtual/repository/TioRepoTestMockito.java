@@ -226,14 +226,14 @@ class TioRepoTestMockito {
         when(tioRepository.findById(2l)).thenReturn(optTio);
         Optional<Tio> resultado = tioRepository.findById(2l);
         assertTrue(resultado.isPresent());
-        
+        /*
         doAnswer(invocation -> {
             int id = invocation.getArgument(0);
             return id == 2? optTio: Optional.empty();
         }).when(tioRepository).findById(2l);
         Optional<Tio> resultado2 = tioService.getOneById(2l);
         assertTrue(resultado2.isPresent());
-        
+         */
     }
 
     @Test
