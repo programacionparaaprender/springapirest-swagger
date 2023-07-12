@@ -22,6 +22,12 @@
 
 	<!-- scope test esta habilitada para el contexto de testing solamente -->
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<!-- Cache -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

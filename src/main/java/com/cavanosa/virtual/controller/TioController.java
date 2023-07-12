@@ -99,7 +99,7 @@ public class TioController {
             if(tioService.exixtsByEmail(tioDto.getEmail()))
                 return getMensaje("ya existe ese email", HttpStatus.BAD_REQUEST);
             Tio tio = new Tio(tioDto.getNombre(), tioDto.getEmail(), tioDto.getPassword());
-            tioService.save(tio);
+            //tioService.save(tio);
             if(tioService.save(tio) == true) {
         	    return new ResponseEntity<Tio>(tio, HttpStatus.CREATED);
             }else
