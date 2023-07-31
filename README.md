@@ -1,3 +1,12 @@
+### cursos
+>- https://www.udemy.com/course/introduccion-a-sql-con-oracle-11g/learn/lecture/3002512#overview
+
+
+### configurar properties de oracle
+>- https://stackoverflow.com/questions/54305348/how-to-connect-to-oracle-database-using-spring-boot
+>- https://stackoverflow.com/questions/57715024/hibernate-dialect-for-oracle-19
+>- https://www.codejava.net/frameworks/spring-boot/connect-to-oracle-database-examples
+
 # levantar proyecto
 mvn spring-boot:run
 mvn test
