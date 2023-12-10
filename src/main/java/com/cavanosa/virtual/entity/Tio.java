@@ -40,5 +40,11 @@ public class Tio {
         this.email = email;
         this.password = password;
     }
-
+    
+    @Override
+    public String toString() {
+    	return "[nombre=" + nombre + ",email="+ email +"]";
+    }
 }
+
+
