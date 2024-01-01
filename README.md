@@ -4,6 +4,12 @@
 ### dockerizar aplicativo
 >- https://github.com/pedrovelasquez9/springboot-postgresql-docker-compose/blob/master/docker-compose.yml
 >- https://www.youtube.com/watch?v=uqBZEL9m2V4
+>- docker-compose build java
+>- docker-compose build
+>- docker-compose up
+>- docker-compose down
+>- docker image rm afd 801
+
 
 ### configurar properties de oracle
 >- https://stackoverflow.com/questions/54305348/how-to-connect-to-oracle-database-using-spring-boot
