@@ -1,6 +1,9 @@
 ### cursos
 >- https://www.udemy.com/course/introduccion-a-sql-con-oracle-11g/learn/lecture/3002512#overview
 
+### dockerizar aplicativo
+>- https://github.com/pedrovelasquez9/springboot-postgresql-docker-compose/blob/master/docker-compose.yml
+>- https://www.youtube.com/watch?v=uqBZEL9m2V4
 
 ### configurar properties de oracle
 >- https://stackoverflow.com/questions/54305348/how-to-connect-to-oracle-database-using-spring-boot
