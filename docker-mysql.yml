@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  app:
+    container_name: java_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8762:8762
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=jdbc:mysql://mysqldb:3306/${MYSQL_DATABASE}?createDatabaseIfNotExist=true
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=${MYSQL_PASSWORD}
+    
+    networks:
+      - springboot-mysql-network
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:8.0.33
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - springboot-mysql-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
+volumes:
+  mysql-data:
+networks:
+  springboot-mysql-network:
+    name: springboot-mysql-network

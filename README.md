@@ -9,6 +9,7 @@
 >- docker-compose up
 >- docker-compose down
 >- docker image rm afd 801
+>- MYSQL_DATABASE=mydatabase MYSQL_PASSWORD=rootpassword docker-compose up -d
 
 
 ### configurar properties de oracle
